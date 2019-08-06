@@ -4,8 +4,15 @@
     "pages/notBegun/main",
     "pages/AddInterviews/main",
     "pages/all/main",
+<<<<<<< HEAD
     "pages/coreDumped/main",
     "pages/counter/main"
+=======
+    "pages/counter/main" ,
+     "pages/list/main",
+    "pages/baidu/main",
+    "pages/index/main"
+>>>>>>> 03575077748203f671e1af7dfa5cc0f1b760b9d5
   ],
   "window": {
     "backgroundTextStyle": "light",
