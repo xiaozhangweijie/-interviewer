@@ -1,44 +1,76 @@
 <template>
   <div class="counter-warp">
-    <p>Vuex counter：{{ count }}</p>
-    <p>
-      <button @click="increment">+</button>
-      <button @click="decrement">-</button>
-    </p>
+    <div class="dls">
+      <div>
+        <h3>百度</h3><span class="start">未开始</span>
+      </div>
+      <div>北京市海淀区西二旗</div>
+      <div>
+        <span>面试时间：2019-08-06 17:00</span>
+        <span class="end">未提醒</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// Use Vuex
-import store from './store'
-
 export default {
   computed: {
-    count () {
-      return store.state.count
-    }
+  
   },
   methods: {
-    increment () {
-      store.commit('increment')
-    },
-    decrement () {
-      store.commit('decrement')
-    }
+   
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .counter-warp {
-  text-align: center;
-  margin-top: 100px;
+width:100%;
+height:100%;
+background:#eee;
 }
-.home {
-  display: inline-block;
-  margin: 100px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
+.dls{
+  margin-top:3%;
+  width:100%;
+  height:auto;
+  background:#fff;
+  padding:0 10px;
+  box-sizing:border-box;
+  >div:nth-child(1){
+    h3{
+      font-size:24px;
+    }
+    .start{
+      background:#eee;
+      font-size:12px;
+      color:#ccc;
+      padding:5px 10px;
+      box-sizing:border-box;
+          }
+  }
+  >div:nth-child(2){
+    color:#ccc;
+    font-size:16px;
+  }
+  >div:nth-child(3){
+    span:nth-child(1){
+      font-size:16px;
+    }
+    .end{
+      background:rgb(253,239,240);
+      color:mediumvioletred;
+      font-size:14px;
+      padding:10px 10px;
+      box-sizing:border-box;
+    }
+  }
+  >div{
+    padding:10px 15px;
+     box-sizing:border-box;
+display:flex;
+justify-content: space-between;
+
+  }
 }
 </style>
