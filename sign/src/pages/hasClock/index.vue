@@ -1,10 +1,38 @@
 <template>
   <div class="counter-warp">
-    <p>Vuex counter：{{ count }}</p>
-    <p>
-      <button @click="increment">+</button>
-      <button @click="decrement">-</button>
-    </p>
+   <div class="bawei">
+     <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+     <p class="titles">北京市海淀区唐家岭57号(进上地西街)</p>
+      <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+   </div>
+    <div class="bawei">
+     <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+     <p class="titles">北京市海淀区唐家岭57号(进上地西街)</p>
+      <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+   </div>
+    <div class="bawei">
+     <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+     <p class="titles">北京市海淀区唐家岭57号(进上地西街)</p>
+      <div class="title">
+       <span>八维</span>
+       <span>已打卡</span>
+     </div>
+   </div>
   </div>
 </template>
 
@@ -15,30 +43,28 @@ import store from './store'
 export default {
   computed: {
     count () {
-      return store.state.count
+     
     }
   },
   methods: {
-    increment () {
-      store.commit('increment')
-    },
-    decrement () {
-      store.commit('decrement')
-    }
+   
   }
 }
 </script>
 
 <style>
 .counter-warp {
-  text-align: center;
-  margin-top: 100px;
+ width: 100%;
+ height: 100%;
 }
-.home {
-  display: inline-block;
-  margin: 100px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
+.bawei{
+  height: 80px;
+  line-height: 28px;
+  border-top: 3px solid #ccc;
+   border-bottom: 3px solid #ccc;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
 }
 </style>

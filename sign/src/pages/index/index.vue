@@ -6,7 +6,6 @@
     </footer>
   </div>
 </template>
-
 <script>
 
 export default {
@@ -23,7 +22,7 @@ export default {
   methods: {
    look(){
      wx.navigateTo({
-       url:"/pages/add/main"
+       url:"/pages/AddInterviews/main"
      })
    }
   },
