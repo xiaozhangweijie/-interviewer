@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/main",
     "pages/notBegun/main",
+    "pages/index/main",
     "pages/hasClock/main",
     "pages/AddInterviews/main",
     "pages/all/main",

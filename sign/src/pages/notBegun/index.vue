@@ -10,16 +10,31 @@
         <span class="end">未提醒</span>
       </div>
     </div>
+      <div class="dls">
+      <div>
+        <h3>百度</h3><span class="start">未开始</span>
+      </div>
+      <div>北京市海淀区西二旗</div>
+      <div>
+        <span>面试时间：2019-08-06 17:00</span>
+        <span class="end">未提醒</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex';
 export default {
   computed: {
-  
+  ...mapState({
+    list:state=>state.tab.list
+  })
   },
   methods: {
-   
+   ...mapActions({
+     location:"tab/getLocation"
+   })
   }
 }
 </script>
