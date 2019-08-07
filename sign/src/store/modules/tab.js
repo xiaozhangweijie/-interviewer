@@ -7,26 +7,18 @@ const state = {
   // 模块内的同步改变
   const mutations = {
     updateLocation(state,payload){
-      console.log(state.list);
-        state.list=payload.list;
+        state.list=payload;
     }
   }
   
   // 模块内的异步改变
   const actions = {
       async  getLocation({commit},payload){
-          const res=await sign;
-          console.log(res);
-          commit("updateLocation",res);
+          const res=await sign(payload);
+          console.log("res",res.data);
+          commit("updateLocation",res.data);
       }
-    // sign({commit}, payload){
-    //   wx.sign({
-    //       success(res){
-    //           console.log(res);
-    //       }
-    //   })
-    // }
-  }
+     }
   export default {
     namespaced: true,
     state,

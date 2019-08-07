@@ -1,26 +1,16 @@
 <template>
   <div class="counter-warp">
-    <div class="dls">
+    <div class="dls" v-for="(item,index) in start" :key="index">
       <div>
-        <h3>百度</h3><span class="start">未开始</span>
+        <h3>{{item.company}}</h3><span class="start">未开始</span>
       </div>
-      <div>北京市海淀区西二旗</div>
-      <div>
-        <span>面试时间：2019-08-06 17:00</span>
-        <span class="end">未提醒</span>
-      </div>
-    </div>
-      <div class="dls">
-      <div>
-        <h3>百度</h3><span class="start">未开始</span>
-      </div>
-      <div>北京市海淀区西二旗</div>
+      <div>{{add(33)}}</div>
       <div>
         <span>面试时间：2019-08-06 17:00</span>
         <span class="end">未提醒</span>
       </div>
     </div>
-  </div>
+   </div>
 </template>
 
 <script>
@@ -28,13 +18,37 @@ import {mapState, mapActions} from 'vuex';
 export default {
   computed: {
   ...mapState({
-    list:state=>state.tab.list
-  })
+    start:state=>state.tab.list
+  }),
+  data(){
+    return {
+      num:1
+    }
+  }
   },
   methods: {
    ...mapActions({
      location:"tab/getLocation"
-   })
+   }),
+  
+   address:function(item){
+    //  let arr=[];
+    //  arr.push(item);
+    // arr.map(item=>{
+    //   if(item.includes("{")){
+    //       return JSON.parse(item).address
+    //   }else{
+    //     return item;
+    //   }
+    // })
+    return 222
+    
+     //console.log(JSON.parse(item));
+     //return JSON.parse(item).address;
+   }
+  },
+  created(){
+  this.location({status:-1,remind:-1});
   }
 }
 </script>
@@ -44,23 +58,24 @@ export default {
 width:100%;
 height:100%;
 background:#eee;
+overflow-y: auto;
 }
 .dls{
   margin-top:3%;
   width:100%;
-  height:auto;
+  height:126px;
   background:#fff;
   padding:0 10px;
   box-sizing:border-box;
   >div:nth-child(1){
     h3{
-      font-size:24px;
+      font-size:20px;
     }
     .start{
       background:#eee;
       font-size:12px;
       color:#ccc;
-      padding:5px 10px;
+      padding:5px 5px;
       box-sizing:border-box;
           }
   }
@@ -76,7 +91,7 @@ background:#eee;
       background:rgb(253,239,240);
       color:mediumvioletred;
       font-size:14px;
-      padding:10px 10px;
+      padding:5px 5px;
       box-sizing:border-box;
     }
   }
