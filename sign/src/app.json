@@ -1,13 +1,13 @@
 {
   "pages": [
+    "pages/baidu/main",
+    "pages/index/main",
     "pages/notBegun/main",
     "pages/hasClock/main",
     "pages/coreDumped/main",
     "pages/all/main",
     "pages/counter/main" ,
-     "pages/list/main",
-    "pages/baidu/main",
-    "pages/index/main"
+     "pages/list/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
