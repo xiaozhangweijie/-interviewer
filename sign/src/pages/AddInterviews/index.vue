@@ -6,7 +6,7 @@
         公司名称
     </div>
     <div class="right">
-        <input type="text" placeholder="请输入公司名称">
+        <input type="text" placeholder="请输入公司名称" >
     </div>
    </div>
     <div class="install">
@@ -36,7 +36,7 @@
    <div class="beizhu">
        <p class="title">备注信息</p>
        <textarea class="texts" name="" id="" cols="20" rows="30">备注信息(可选,100个字以内)</textarea>
-       <button class="btn">确认</button>
+       <button class="btn" >确认</button>
    </div>
   </div>
 

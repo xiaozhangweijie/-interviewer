@@ -4,3 +4,6 @@ import fly from '@/utils/request';
 export let login = code=>{
   return fly.post('/user/code2session', {code});
 }
+
+
+

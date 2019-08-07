@@ -42,11 +42,15 @@ computed:{
      })
    },
        ...mapActions({
-      location: 'home/getLocation'
+      location: 'home/getLocation',
+     
     })
   },
-
+  mounted(){
+    
+  },
   created () {
+  
   }
 }
 </script>

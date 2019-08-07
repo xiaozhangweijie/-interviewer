@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/notBegun/main",
-    "pages/hasClock/main",
     "pages/AddInterviews/main",
-    "pages/all/main",
     "pages/coreDumped/main",
+    "pages/index/main",
+    "pages/notBegun/main", 
+    "pages/hasClock/main",
+    "pages/all/main",  
     "pages/counter/main",
     "pages/baidu/main"
   ],
