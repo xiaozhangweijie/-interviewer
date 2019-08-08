@@ -15,70 +15,36 @@
     </div>
     <div class="install">
       <div class="left">
-        <picker
-          mode="multiSelector"
-          :range="dateRange"
-          :value="info.date"
-          @change="dateChange"
-          @columnchange="columnChange"
-        >
-          <view class="date">面试时间：{{dateShow}}</view>
-        </picker>
+       面试时间
       </div>
-      <div class="right"></div>
+      <div class="right"> <picker class="picker" mode="date" value="time" start="09:01" end="21:01" @change="bindTimeChange">
+                    <view class="picker">
+                        {{time}}
+                    </view>
+                </picker></div>
     </div>
     <div class="install">
       <div class="left" @click="clickAddress">面试地址</div>
       <div class="right">
-        <input type="text" placeholder="请输入公司地址">
+        <input type="text" placeholder="请输入公司地址"  v-model="address">
       </div>
     </div>
     <div class="beizhu">
       <p class="title">备注信息</p>
       <textarea class="texts" name id cols="20" rows="30" v-model="textarea">备注信息(可选,100个字以内)</textarea>
-      <button class="btn" form-type="submit" @click="tab">确认</button>
+      <button class="btn" @click="submit" >确认</button>
     </div>
   </div>
 </template>
 
 <script>
-const range = [
-  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-  [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-    21,
-    22,
-    23
-  ],
-  ["00分", "10分", "20分", "30分", "40分", "50分"]
-];
 export default {
   data() {
-    return {
-      info: {
-        date: [0, 0, 0]
-      }
-    };
+     return {
+            firmName:'',
+            time: new Date().toLocaleDateString().replace(/\//g,'-'),
+        }
+
   },
   computed: {
     count() {}
@@ -109,6 +75,15 @@ export default {
         });
         return false;
       }
+        if (!this.textarea) {
+        wx.showToast({
+          title: "请填写备注",
+          icon: "none"
+        });
+        return false;
+      }
+      
+      console.log(1)
     },
 
     //跳转地址
@@ -116,30 +91,10 @@ export default {
       const url = "../address/main";
       mpvue.navigateTo({ url });
     },
-    dateRange() {
-      let dateRange = [...range];
-      // 如果时间是今天，过滤掉现在之前的小时
-      if (!this.info.date[0]) {
-        dateRange[1] = dateRange[1].filter(item => {
-          return item > moment().hour();
-        });
-      } else {
-        dateRange[1] = range[1];
-      }
-      // 格式化小时
-      dateRange[1] = dateRange[1].map(item => {
-        return item + "点";
-      });
-      // 计算当前日期之后的十天
-      dateRange[0] = dateRange[0].map(item => {
-        return (
-          moment()
-            .add(item, "days")
-            .date() + "号"
-        );
-      });
-      return dateRange;
-    }
+      bindTimeChange(e) {
+            this.time = e.mp.detail.value
+      },
+
   }
 };
 </script>
