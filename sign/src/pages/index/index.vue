@@ -8,12 +8,9 @@
       :longitude="longitude"
       :latitude="latitude"
     ></map>
-      <div class="location" @click="location">
-       <image src="../../static/images/location.png"></image>
-    </div>
-    <div class="right" @click="my">
-      <image src="../../static/images/my.png"></image>
-    </div>
+      <cover-view class="location" @click="location">
+       <button>定位</button>
+    </cover-view>
 </section>
     <footer class="footer" @click="look">
       添加面试
@@ -41,20 +38,19 @@ computed:{
   methods: {
    look(){
      wx.navigateTo({
-       url:"/pages/AddInterviews/main"
+       url:"/pages/addInterviews/main"
      })
    },
        ...mapActions({
-      location: 'home/getLocation'
-    }),
-    my(){
-      wx.navigateTo({
-        url:"/pages/my/main"
-      })
-    }
+      location: 'home/getLocation',
+     
+    })
   },
-
+  mounted(){
+    
+  },
   created () {
+  
   }
 }
 </script>
@@ -81,29 +77,9 @@ html,body{
     height:100%;
  }
  .location{
-   width:50px;
-   height:50px;
-   >image{
-    width:100%;
-    height:100%;
-   }
   position: fixed;
-  bottom: 150rpx;
+  bottom: 100rpx;
   left: 30rpx;
-}
-.right{
-    width:50px;
-   height:50px;
-   background:#000;
-   border-radius:50%;
-   >image{
-    width:100%;
-    height:100%;
-    border-radius:50%;
-   }
-   position: fixed;
-  bottom: 150rpx;
-  right: 30rpx;
 }
 }
 .footer{
