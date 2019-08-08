@@ -91,6 +91,9 @@ export default {
     border-top: 1px solid #eee;
     display:flex;
   }
+  .active{
+      display:none;
+  }
  span:nth-child(1){
      line-height:44px;
  }

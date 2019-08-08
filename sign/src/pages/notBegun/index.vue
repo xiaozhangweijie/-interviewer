@@ -47,11 +47,11 @@ export default {
     tab(index) {
       this.ind = index;
       if (index === 0) {
-        this.location({ status: -1, remind: -1 });
+        this.location({ status: -1 });
       } else if (index === 1) {
-        this.location({ status: 0, remind: -1 });
+        this.location({ status: 0 });
       } else if (index === 2) {
-        this.location({ status: 1, remind: -1 });
+        this.location({ status: 1});
       } else {
         this.location();
       }
