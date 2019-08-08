@@ -26,13 +26,13 @@
     <div class="install">
       <div class="left" @click="clickAddress">面试地址</div>
       <div class="right">
-        <input type="text" placeholder="请输入公司地址">
+        <input type="text" placeholder="请输入公司地址"  v-model="address">
       </div>
     </div>
     <div class="beizhu">
       <p class="title">备注信息</p>
       <textarea class="texts" name id cols="20" rows="30" v-model="textarea">备注信息(可选,100个字以内)</textarea>
-      <button class="btn" form-type="submit" @click="tab">确认</button>
+      <button class="btn" @click="submit" >确认</button>
     </div>
   </div>
 </template>
@@ -52,11 +52,12 @@ export default {
   methods: {
     //点击确定验证
     submit(e) {
-      console.log(this.name);
+      console.log(e);
       if (!this.name) {
         wx.showToast({
           title: "请输入公司名称", //提示的内容,
-          icon: "none" //图标,
+          icon: "none", //图标,
+          duration: 2000
         });
         return false;
       }
@@ -64,17 +65,40 @@ export default {
       if (!/^1(3|4|5|7|8)\d{9}$/.test(this.phone)) {
         wx.showToast({
           title: "请输入面试联系人的手机或座机",
-          icon: "none"
+          icon: "none",
+          duration: 2000
         });
         return false;
       }
       if (!this.address) {
         wx.showToast({
           title: "请选择公司地址",
-          icon: "none"
+          icon: "none",
+          duration: 2000
         });
         return false;
       }
+        if (!this.textarea) {
+        wx.showToast({
+          title: "请填写备注",
+          icon: "none",
+          duration: 2000
+        });
+        return false;
+      }
+       wx.showModal({
+            title: '温馨提示',
+            content: '添加面试成功',
+            success (res) {
+            if (res.name) {
+                console.log('用户点击确定',this.name)
+               console.log(res)
+            } else if (res.cancel) {
+                console.log('用户点击取消')
+            }
+          }
+        })
+      console.log(1)
     },
 
     //跳转地址
