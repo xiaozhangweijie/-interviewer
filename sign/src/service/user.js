@@ -8,3 +8,7 @@ export let login = code=>{
 export let sign=(params)=>{
   return fly.get("/sign",params);
 }
+//获取面试详情
+export let signDetail=(id)=>{
+  return fly.get("/sign/"+id);
+}

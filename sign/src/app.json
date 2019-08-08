@@ -3,11 +3,6 @@
     "pages/notBegun/main",
     "pages/index/main",
     "pages/my/main",
-    "pages/hasClock/main",
-    "pages/AddInterviews/main",
-    "pages/all/main",
-    "pages/coreDumped/main",
-    "pages/counter/main",
     "pages/baidu/main"
   ],
   "window": {

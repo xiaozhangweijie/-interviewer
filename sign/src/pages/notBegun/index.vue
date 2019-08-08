@@ -9,7 +9,7 @@
       >{{item}}</li>
     </ul>
     <section v-if="listt.length">
-      <div class="dls" v-for="(item,index) in listt" :key="index" @click="detail">
+      <div class="dls" v-for="(item,index) in listt" :key="index" @click="detail(item.id)">
         <div>
           <h3>{{item.company}}</h3>
           <span class="start">{{item.status===-1?"未开始":item.status===0?"已打卡":item.status===1?"已放弃":null}}</span>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </section>
-    <div v-else class="none">此页面还没有面试！</div>
+    <div v-else class="none">当前分类还没有面试！</div>
   </div>
 </template>
 
@@ -55,17 +55,14 @@ export default {
       } else {
         this.location();
       }
-    },detail(){
+    },detail(id){
        wx.navigateTo({
-       url:"/pages/baidu/main"
+       url:"/pages/baidu/main?id="+id
      })
-    },startEnd(time){
-      console.log(time);
-      return 33;
     }
   },
   created() {
-    this.location({ status: -1, remind: -1 });
+    this.tab(0);
   }
 };
 </script>
@@ -98,7 +95,7 @@ section {
 .dls {
   margin-top: 3%;
   width: 100%;
-  height: 126px;
+ // height: 126px;
   background: #fff;
   padding: 0 10px;
   box-sizing: border-box;
@@ -117,6 +114,7 @@ section {
   > div:nth-child(2) {
     color: #ccc;
     font-size: 14px;
+    display:flex;
   }
   > div:nth-child(3) {
     span:nth-child(1) {
@@ -139,5 +137,8 @@ section {
 }
 .none{
   text-align: center;
+  background:#fff;
+  width:100%;
+  height:100%;
 }
 </style>
