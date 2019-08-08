@@ -36,10 +36,15 @@ computed:{
     })
 },
   methods: {
+     ...mapActions({
+      location: 'home/getLocation',
+      getSuggestion: 'address/getSuggestion'
+    }),
    look(){
      wx.navigateTo({
        url:"/pages/addInterviews/main"
      })
+<<<<<<< HEAD
    },
        ...mapActions({
       location: 'home/getLocation',
@@ -49,6 +54,14 @@ computed:{
   mounted(){
     
   },
+=======
+   }
+      
+  },
+  mounted(){
+      this.getSuggestion('八维');
+  },
+>>>>>>> sjxx
   created () {
   
   }

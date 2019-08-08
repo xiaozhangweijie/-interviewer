@@ -15,6 +15,7 @@
     </div>
     <div class="install">
       <div class="left">
+<<<<<<< HEAD
        面试时间
       </div>
       <div class="right"> <picker class="picker" mode="date" value="time" start="09:01" end="21:01" @change="bindTimeChange">
@@ -22,6 +23,21 @@
                         {{time}}
                     </view>
                 </picker></div>
+=======
+    <picker
+              mode="multiSelector"
+              :range="dateRange"
+              :value="info.date"
+              @change="dateChange"
+              @columnchange="columnChange"
+            ><view class="date">面试时间：{{dateShow}}</view>
+            </picker>
+           
+      </div>
+      <div class="right"> 
+                   <icon type="info" class="icon" @click="btnClick"/>
+                </div>
+>>>>>>> sjxx
     </div>
     <div class="install">
       <div class="left" @click="clickAddress">面试地址</div>
@@ -38,6 +54,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 export default {
   data() {
      return {
@@ -48,6 +65,22 @@ export default {
   },
   computed: {
     count() {}
+=======
+const moment = require('moment');
+const range = [
+  [0,1,2,3,4,5,6,7,8,9],
+  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+  ['00分','10分','20分','30分','40分','50分']
+];
+export default {
+  data() {
+     return {
+        info: {
+        date: [0,0,0],
+      },           
+        }
+
+>>>>>>> sjxx
   },
   methods: {
     //点击确定验证
@@ -98,19 +131,65 @@ export default {
             }
           }
         })
+<<<<<<< HEAD
       console.log(1)
     },
 
+=======
+    },
+ //icon提示
+      iconBtn() {
+          wx.showToast({
+            title: '成功',
+            icon: 'success',
+            duration: 2000
+        })
+      },
+>>>>>>> sjxx
     //跳转地址
     clickAddress: () => {
       const url = "../address/main";
       mpvue.navigateTo({ url });
     },
+<<<<<<< HEAD
       bindTimeChange(e) {
             this.time = e.mp.detail.value
       },
 
   }
+=======
+  },
+   computed: {
+   dateRange(){
+      let dateRange = [...range];
+      // 如果时间是今天，过滤掉现在之前的小时
+      if (!this.info.date[0]){
+        dateRange[1] = dateRange[1].filter(item=>{
+          return item>moment().hour();
+        })
+      }else{
+        dateRange[1] = range[1]
+      }
+      // 格式化小时
+      dateRange[1] = dateRange[1].map(item=>{
+        return item+'点'
+      })
+      // 计算当前日期之后的十天
+      dateRange[0] = dateRange[0].map(item=>{
+        return moment().add(item, 'days').date()+'号'
+      })
+      return dateRange;
+    },
+    // 显示的日期
+    dateShow(){
+      return moment()
+      .add(moment().hour()==23?this.info.date[0]-1:this.info.date[0], 'd')
+       .add(this.info.date[1]+1, 'h')
+      .minute(this.info.date[2]*10)
+      .format('YYYY-MM-DD HH:mm');
+    },
+  },
+>>>>>>> sjxx
 };
 </script>
 
