@@ -36,18 +36,19 @@ computed:{
     })
 },
   methods: {
+     ...mapActions({
+      location: 'home/getLocation',
+      getSuggestion: 'address/getSuggestion'
+    }),
    look(){
      wx.navigateTo({
        url:"/pages/addInterviews/main"
      })
-   },
-       ...mapActions({
-      location: 'home/getLocation',
-     
-    })
+   }
+      
   },
   mounted(){
-    
+      this.getSuggestion('八维');
   },
   created () {
   

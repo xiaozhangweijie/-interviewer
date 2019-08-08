@@ -1,9 +1,8 @@
 {
   "pages": [
     "pages/addInterviews/main",
-    "pages/index/main", 
-
     "pages/address/main",
+    "pages/index/main", 
     "pages/counter/main"
   ],
   "window": {
