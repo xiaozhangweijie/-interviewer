@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/hasClock/main",
     "pages/notBegun/main",
-    "pages/my/main",
     "pages/index/main",
+    "pages/my/main",
+    "pages/hasClock/main",
     "pages/AddInterviews/main",
     "pages/all/main",
     "pages/coreDumped/main",
@@ -15,27 +15,5 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "一面而就",
     "navigationBarTextStyle": "black"
-  }
-  ,
-  "tabBar": {
-    "color": "#999",
-    "backgroundColor": "#fafafa",
-    "selectedColor": "#333",
-    "borderStyle": "white",
-
-    "list": [{
-      "text": "未开始",
-      "pagePath": "pages/notBegun/main"
-    }, {
-      "text": "已打卡",
-      "pagePath": "pages/hasClock/main"
-    }, {
-      "text": "已放弃",
-      "pagePath": "pages/coreDumped/main"
-    }, {
-      "text": "全部",
-      "pagePath": "pages/all/main"
-    }],
-    "position": "top"
   }
 }

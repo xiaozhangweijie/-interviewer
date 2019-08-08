@@ -36,9 +36,8 @@
    <div class="beizhu">
        <p class="title">备注信息</p>
        <textarea class="texts" name="" id="" cols="20" rows="30">备注信息(可选,100个字以内)</textarea>
-       <button class="btn">
-           <a href="/pages/notBegun/main">确认 </a>
-           </button>
+       <button class="btn" @click="tab">
+           确认 </button>
    </div>
   </div>
 
@@ -55,11 +54,12 @@ export default {
     }
   },
   methods: {
-  tab(){
-      console.log(111);
-    // wx.navigateTo({
-    //    url:"/pages/notBegun/main"
-    //  })
+  tab:()=>{
+    //   const url="../notBegun/main";
+    // mpvue.navigateTo({url});
+   wx.switchTab({
+       url:"../notBegun/main"
+     })
   }
   }
 }

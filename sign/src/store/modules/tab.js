@@ -16,6 +16,10 @@ const state = {
       async  getLocation({commit},payload){
           const res=await sign(payload);
           console.log("res",res.data);
+          res.data.forEach(item=>{
+              item.address=JSON.parse(item.address);
+              item.start_time=new Date(item.start_time*1).toLocaleDateString();
+          })
           commit("updateLocation",res.data);
       }
      }
