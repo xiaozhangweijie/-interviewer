@@ -54,7 +54,7 @@ export default {
     methods:{
 choose(){
       wx.navigateTo({
-       url:"/pages/index/main"
+       url:"/pages/notBegun/main"
      })
 },  hideMask(e){
       if (e.target.dataset.id == 1){
