@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+<div class="wrap">
 <section class="section">
     <map
       id="map"
@@ -8,58 +8,50 @@
       :longitude="longitude"
       :latitude="latitude"
     ></map>
-      <div class="location" @click="location">
+      <div class="location">
        <image src="../../static/images/location.png"></image>
-    </div>
-    <div class="right" @click="my">
-      <image src="../../static/images/my.png"></image>
     </div>
 </section>
     <footer class="footer" @click="look">
-      添加面试
+      打卡
     </footer>
   </div>
 </template>
+
 <script>
-import {mapState, mapActions} from 'vuex';
+import {mapState, mapActions} from 'vuex'
 export default {
   data () {
     return {
-   markers:[]
+         markers:[]
     }
   },
-
   components: {
-   
+
   },
-computed:{
-  ...mapState({
-      longitude: state=>state.home.longitude,
-      latitude: state=>state.home.latitude
+  computed: {
+    ...mapState({
+      longitude: state=>state.tab.longitude,
+      latitude: state=>state.tab.latitude
     })
-},
-  methods: {
-   look(){
-     wx.navigateTo({
-       url:"/pages/address/main"
-     })
-   },
-       ...mapActions({
-      location: 'home/getLocation'
-    }),
-    my(){
-      wx.navigateTo({
-        url:"/pages/my/main"
-      })
-    }
   },
 
-  created () {
+  methods: {
+     ...mapActions({
+      location: 'tab/getSigndetail'
+    }),
+    look(){
+        this.location(this.id);
+    }
+  },  onLoad(options) {
+    this.id = options.id;
+    this.look();
   }
+
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 *{
   margin:0;
   padding:0;

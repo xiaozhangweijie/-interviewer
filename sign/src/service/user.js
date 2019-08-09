@@ -12,3 +12,11 @@ export let sign=(params)=>{
 export let signDetail=(id)=>{
   return fly.get("/sign/"+id);
 }
+//更新面试状态
+export let updateSignDetail = (id,params)=>{
+  console.log("res",id.params);
+  return fly.put('/sign/'+id.id,id.params);
+}
+export let decrypt=(params)=>{
+  return fly.post("/user/decrypt",params);
+}
