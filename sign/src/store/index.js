@@ -4,22 +4,16 @@ import CreateLogger from 'vuex/dist/logger';
 
 // 引入store子模块
 import home from './modules/home';
-<<<<<<< HEAD
-import addInterview from './modules/addInterview'
-=======
 import address from './modules/address';
->>>>>>> sjxx
+import tab from './modules/tab';
 Vue.use(Vuex);
 
-
+l
 export default new Vuex.Store({
   modules: {
     home,
-<<<<<<< HEAD
-    addInterview,
-=======
-    address
->>>>>>> sjxx
+    address,
+    tab
   },
   plugins: [CreateLogger()]
 })

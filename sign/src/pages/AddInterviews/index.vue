@@ -15,15 +15,6 @@
     </div>
     <div class="install">
       <div class="left">
-<<<<<<< HEAD
-       面试时间
-      </div>
-      <div class="right"> <picker class="picker" mode="date" value="time" start="09:01" end="21:01" @change="bindTimeChange">
-                    <view class="picker">
-                        {{time}}
-                    </view>
-                </picker></div>
-=======
     <picker
               mode="multiSelector"
               :range="dateRange"
@@ -37,7 +28,6 @@
       <div class="right"> 
                    <icon type="info" class="icon" @click="btnClick"/>
                 </div>
->>>>>>> sjxx
     </div>
     <div class="install">
       <div class="left" @click="clickAddress">面试地址</div>
@@ -54,18 +44,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-  data() {
-     return {
-            firmName:'',
-            time: new Date().toLocaleDateString().replace(/\//g,'-'),
-        }
-
-  },
-  computed: {
-    count() {}
-=======
 const moment = require('moment');
 const range = [
   [0,1,2,3,4,5,6,7,8,9],
@@ -80,12 +58,12 @@ export default {
       },           
         }
 
->>>>>>> sjxx
   },
   methods: {
     //点击确定验证
     submit(e) {
-      console.log(e);
+         const url = "../notBegun/main";
+      mpvue.navigateTo({ url });
       if (!this.name) {
         wx.showToast({
           title: "请输入公司名称", //提示的内容,
@@ -125,17 +103,12 @@ export default {
             success (res) {
             if (res.name) {
                 console.log('用户点击确定',this.name)
-               console.log(res)
+             
             } else if (res.cancel) {
                 console.log('用户点击取消')
             }
           }
         })
-<<<<<<< HEAD
-      console.log(1)
-    },
-
-=======
     },
  //icon提示
       iconBtn() {
@@ -145,19 +118,11 @@ export default {
             duration: 2000
         })
       },
->>>>>>> sjxx
     //跳转地址
     clickAddress: () => {
       const url = "../address/main";
       mpvue.navigateTo({ url });
     },
-<<<<<<< HEAD
-      bindTimeChange(e) {
-            this.time = e.mp.detail.value
-      },
-
-  }
-=======
   },
    computed: {
    dateRange(){
@@ -189,7 +154,6 @@ export default {
       .format('YYYY-MM-DD HH:mm');
     },
   },
->>>>>>> sjxx
 };
 </script>
 
