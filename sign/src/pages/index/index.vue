@@ -41,7 +41,7 @@ computed:{
   methods: {
    look(){
      wx.navigateTo({
-       url:"/pages/address/main"
+       url:"/pages/addInterviews/main"
      })
    },
        ...mapActions({

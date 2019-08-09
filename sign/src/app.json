@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/geography/main",
-    "pages/my/main",
-    "pages/sign/main",
+    "pages/index/main", 
     "pages/notBegun/main",
     "pages/baidu/main",
-    "pages/address/main"
+    "pages/my/main",
+    "pages/sign/main",
+    "pages/address/main",
+    "pages/addInterviews/main",
+    "pages/geography/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
