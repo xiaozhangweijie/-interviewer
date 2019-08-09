@@ -9,6 +9,7 @@
     "pages/baidu/main",
     "pages/my/main",
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     "pages/address/main",
 
@@ -20,6 +21,12 @@
     "pages/address/main"
 >>>>>>> sjxx
 
+=======
+    "pages/sign/main",
+    "pages/address/main",
+    "pages/addInterviews/main",
+    "pages/geography/main"
+>>>>>>> 86919db22f7d0d4ed48c05f63d3aee381cfd6ea4
   ],
   "window": {
     "backgroundTextStyle": "light",

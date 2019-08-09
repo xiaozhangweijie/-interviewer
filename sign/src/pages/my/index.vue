@@ -16,7 +16,7 @@
         </div>
         <span>> </span>
     </div>
-      <div>
+      <div @click="geo">
         <div>
             <span>
             <image src="../../static/images/jinggao.png"></image>
@@ -26,9 +26,14 @@
         <span>> </span>
     </div>
 </div>
+  <div class="phone" v-if="showPhoneDialog" @click="hideMask" data-id=1>
+      <p>为了更好的使用我们的服务，我们需要获取你的手机号码</p>
+      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">同意</button>
+    </div>
     </div>
 </template>
 <script>
+import {mapState, mapActions, mapMutations} from 'vuex'
 export default {
     props:{
 
@@ -38,20 +43,44 @@ export default {
     },
     data(){
         return {
-
+ showPhoneDialog:true
         }
     },
     computed:{
-
+...mapState({
+    phone:state=>state.user.phone
+})
     },
     methods:{
 choose(){
       wx.navigateTo({
-       url:"/pages/index/main"
+       url:"/pages/notBegun/main"
      })
-}
+},  hideMask(e){
+      if (e.target.dataset.id == 1){
+        this.showPhoneDialog =false;
+      }
+    },  ...mapActions({
+      location: 'user/getUser'
+    }),getPhoneNumber(e){
+        let {iv,encryptedData}=e.target;
+        if(encryptedData){
+             this.location({iv:iv,
+        encryptedData:encryptedData});
+         this.showPhoneDialog = false;
+        }else{
+            this.showPhoneDialog = false;
+        }
     },
-    created(){
+    geo(){
+  wx.navigateTo({
+        url:"/pages/geography/main"
+      })
+
+
+    }
+    },
+   created(){
 
     },
     mounted(){
@@ -112,5 +141,34 @@ width:100%;
     >span{
     }
 }
+}
+.phone{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0, .3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  p{
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    width:70%;
+    background:#fff;
+    padding:20rpx 15rpx;
+    line-height: 1.5;
+    font-size:34rpx;
+    box-sizing:border-box;
+  }
+  button{
+    width: 70%;
+    background: #197DBF;
+    color: #fff;
+    border-bottom-left-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
+  }
 }
 </style>

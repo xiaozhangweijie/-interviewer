@@ -1,7 +1,17 @@
 <script>
-import {login} from '@/service/';
-
+import {login,finger} from '@/service/';
+import {mapState, mapActions} from 'vuex';
 export default {
+  computed:{
+  ...mapState({
+      fing: state=>state.home.fing,
+    })
+},
+    methods: {
+         ...mapActions({
+      location: 'home/userfing'
+    })
+    },
   created () {
     // 调用API从本地缓存中获取数据
     /*
@@ -11,8 +21,6 @@ export default {
      * 百度：mpvue === swan, mpvuePlatform === 'swan'
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
-
-
     // 调用登陆接口
     wx.login({
       success: async (res)=>{
@@ -24,7 +32,18 @@ export default {
           console.log('登录失败！' + res.errMsg)
         }
       }
-    })
+    }),  wx.startSoterAuthentication({
+        requestAuthModes: ['fingerPrint'],//启动指纹认证
+        challenge: '123456',//这个参数api解释是因子。。反正没看懂，乱填的
+        authContent: '请用指纹解锁',//提示框内容
+        success:(res)=> {
+        this.location({
+          openid:wx.getStorageSync("openid"),
+          json_string:res.resultJSON,
+          json_signature:res.resultJSONSignature
+        })
+        }
+        })
   }
 }
 </script>
