@@ -33,16 +33,16 @@ export default {
   methods: {
     ...mapActions({
       getSuggestion: "address/getSuggestion",
-        getSearch:'address/getSearch',
-            getListItem:'address/getItem'
+      getSearch: "address/getSearch",
+      getListItem: "address/getItem"
     }),
-       changeAddress(val){
-            this.getSearch(val)
-        },
-        clickItem(item){
-            this.getListItem(item)
-            wx.navigateBack();
-        }
+    changeAddress(val) {
+      this.getSearch(val);
+    },
+    clickItem(item) {
+      this.getListItem(item);
+      wx.navigateBack();
+    }
   },
   mounted() {
     this.getSuggestion("八维");

@@ -2,31 +2,31 @@
   <div>
     <ul class="list">
       <li>
-          <span> 面试地址:</span>
+        <span>面试地址:</span>
         <span>{{info.address && info.address.address}}</span>
       </li>
       <li>
-          <span> 面试时间:</span>
-       
+        <span>面试时间:</span>
+
         <span>{{info.start_time}}</span>
       </li>
       <li>
-          <span> 联系方式:</span>
-       
+        <span>联系方式:</span>
+
         <span>{{info.phone}}</span>
       </li>
       <li>
-          <span>是否提醒:</span>
-       
+        <span>是否提醒:</span>
+
         <span>{{info.remind===-1?"未提醒":info.remind===0?"已提醒":info.remind===1?"取消提醒":null}}</span>
       </li>
       <li>
-          <span>面试状态:</span>
-        
+        <span>面试状态:</span>
+
         <span>{{info.status===-1?"未开始":info.status===0?"已打卡":info.status===1?"已放弃":null}}</span>
       </li>
       <li :class="info.status===1?'active':null">
-          <span>取消提醒:</span>
+        <span>取消提醒:</span>
         <switch @change="mess" :checked="info.remind===1"></switch>
       </li>
     </ul>
@@ -49,38 +49,41 @@ export default {
   computed: {
     ...mapState({
       info: state => state.tab.info,
-      updata:state=>state.tab.updata
+      updata: state => state.tab.updata
     })
   },
   methods: {
     ...mapActions({
       location: "tab/getSigndetail",
-      update:"tab/update",
+      update: "tab/update",
       getList: "tab/getLocation"
-    }),giveup(){
-         wx.showModal({
-        title: '温馨提示', //提示的标题,
-        content: '确定要放弃本次面试吗?', //提示的内容,
+    }),
+    giveup() {
+      wx.showModal({
+        title: "温馨提示", //提示的标题,
+        content: "确定要放弃本次面试吗?", //提示的内容,
         success: async res => {
           if (res.confirm) {
             await this.update({
               id: this.id,
-              params:{status:1}
-            })
+              params: { status: 1 }
+            });
           }
-           this.location(this.id);
-           this.getList({ status: -1});
+          this.location(this.id);
+          this.getList({ status: -1 });
         }
       });
-    },mess(e){
+    },
+    mess(e) {
       this.update({
-      id:this.id,
-      params:{remind:e.target.value?1:-1}
-      })
-    },givecord(){
-        wx.navigateTo({
-       url:"/pages/sign/main?id="+this.id
-     })
+        id: this.id,
+        params: { remind: e.target.value ? 1 : -1 }
+      });
+    },
+    givecord() {
+      wx.navigateTo({
+        url: "/pages/sign/main?id=" + this.id
+      });
     }
   },
   onLoad(options) {
@@ -95,20 +98,20 @@ export default {
 .list {
   width: 100%;
   li {
-    height:44px;
-    line-height:44px;
+    height: 44px;
+    line-height: 44px;
     border-top: 1px solid #eee;
-    display:flex;
+    display: flex;
   }
-  .active{
-      display:none;
+  .active {
+    display: none;
   }
- span:nth-child(1){
-     line-height:44px;
- }
+  span:nth-child(1) {
+    line-height: 44px;
+  }
   span:nth-child(2) {
-    width:75%;
-    display:flex;
+    width: 75%;
+    display: flex;
     flex-wrap: wrap;
     white-space: nowrap;
     text-overflow: ellipsis;

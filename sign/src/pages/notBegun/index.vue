@@ -12,12 +12,16 @@
       <div class="dls" v-for="(item,index) in listt" :key="index" @click="detail(item.id)">
         <div>
           <h3>{{item.company}}</h3>
-          <span class="start">{{item.status===-1?"未开始":item.status===0?"已打卡":item.status===1?"已放弃":null}}</span>
+          <span
+            class="start"
+          >{{item.status===-1?"未开始":item.status===0?"已打卡":item.status===1?"已放弃":null}}</span>
         </div>
         <div>{{item.address.address}}</div>
         <div>
           <span>面试时间{{item.start_time}}</span>
-          <span class="end">{{item.remind===-1?"未提醒":item.remind===0?"已提醒":item.remind===1?"取消提醒":null}}</span>
+          <span
+            class="end"
+          >{{item.remind===-1?"未提醒":item.remind===0?"已提醒":item.remind===1?"取消提醒":null}}</span>
         </div>
       </div>
     </section>
@@ -51,14 +55,15 @@ export default {
       } else if (index === 1) {
         this.location({ status: 0 });
       } else if (index === 2) {
-        this.location({ status: 1});
+        this.location({ status: 1 });
       } else {
         this.location();
       }
-    },detail(id){
-       wx.navigateTo({
-       url:"/pages/baidu/main?id="+id
-     })
+    },
+    detail(id) {
+      wx.navigateTo({
+        url: "/pages/baidu/main?id=" + id
+      });
     }
   },
   created() {
@@ -96,7 +101,7 @@ section {
 .dls {
   margin-top: 3%;
   width: 100%;
- // height: 126px;
+  // height: 126px;
   background: #fff;
   padding: 0 10px;
   box-sizing: border-box;
@@ -115,7 +120,7 @@ section {
   > div:nth-child(2) {
     color: #ccc;
     font-size: 14px;
-    display:flex;
+    display: flex;
   }
   > div:nth-child(3) {
     span:nth-child(1) {
@@ -136,10 +141,10 @@ section {
     justify-content: space-between;
   }
 }
-.none{
+.none {
   text-align: center;
-  background:#fff;
-  width:100%;
-  height:100%;
+  background: #fff;
+  width: 100%;
+  height: 100%;
 }
 </style>

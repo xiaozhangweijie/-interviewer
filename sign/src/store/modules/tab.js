@@ -1,9 +1,9 @@
 // 模块所有的状态
-import { sign, signDetail,updateSignDetail } from "../../service/index";
+import { sign, signDetail, updateSignDetail } from "../../service/index";
 const state = {
   list: [],
   info: {},
-  updata:[],
+  updata: [],
   longitude: "113.324520",
   latitude: "23.099994"
 };
@@ -23,8 +23,9 @@ const mutations = {
     state.info = payload;
     state.longitude = payload.longitude;
     state.latitude = payload.latitude;
-  },updata(state,payload){
-    state.updata=payload;
+  },
+  updata(state, payload) {
+    state.updata = payload;
   }
 };
 
@@ -45,10 +46,10 @@ const actions = {
     const res = await signDetail(payload);
     commit("info", res.data);
   },
-  async update({commit},payload){
-    console.log("updata",payload);
-    const res=await updateSignDetail(payload);
-    commit("updata",res.data);
+  async update({ commit }, payload) {
+    console.log("updata", payload);
+    const res = await updateSignDetail(payload);
+    commit("updata", res.data);
   }
 };
 export default {

@@ -43,41 +43,42 @@ export default {
     },
     data(){
         return {
- showPhoneDialog:true
+            showPhoneDialog:true
         }
     },
     computed:{
-...mapState({
-    phone:state=>state.user.phone
-})
+        ...mapState({
+            phone:state=>state.user.phone
+        })
     },
     methods:{
-choose(){
-      wx.navigateTo({
-       url:"/pages/notBegun/main"
-     })
-},  hideMask(e){
-      if (e.target.dataset.id == 1){
-        this.showPhoneDialog =false;
-      }
-    },  ...mapActions({
-      location: 'user/getUser'
-    }),getPhoneNumber(e){
-        let {iv,encryptedData}=e.target;
-        if(encryptedData){
-             this.location({iv:iv,
-        encryptedData:encryptedData});
-         this.showPhoneDialog = false;
-        }else{
-            this.showPhoneDialog = false;
-        }
+        choose(){
+            wx.navigateTo({
+            url:"/pages/notBegun/main"
+            })
+        },  
+        hideMask(e){
+            if (e.target.dataset.id == 1){
+                this.showPhoneDialog =false;
+                }
+             },
+              ...mapActions({
+            location: 'user/getUser'
+      }),
+        getPhoneNumber(e){
+            let {iv,encryptedData}=e.target;
+            if(encryptedData){
+            this.location({iv:iv,
+            encryptedData:encryptedData});
+             this.showPhoneDialog = false;
+            }else{
+              this.showPhoneDialog = false;
+            }
     },
     geo(){
-  wx.navigateTo({
-        url:"/pages/geography/main"
-      })
-
-
+        wx.navigateTo({
+                url:"/pages/geography/main"
+            })
     }
     },
    created(){
