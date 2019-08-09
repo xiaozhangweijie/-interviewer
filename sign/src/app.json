@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/notBegun/main",
     "pages/index/main",
+    "pages/geography/main",
     "pages/my/main",
-    "pages/baidu/main",
-    "pages/sign/main"
+    "pages/sign/main",
+    "pages/notBegun/main",
+    "pages/baidu/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

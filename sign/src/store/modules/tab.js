@@ -3,7 +3,9 @@ import { sign, signDetail,updateSignDetail } from "../../service/index";
 const state = {
   list: [],
   info: {},
-  updata:[]
+  updata:[],
+  longitude: "113.324520",
+  latitude: "23.099994"
 };
 
 // 模块内的同步改变
@@ -12,7 +14,6 @@ const mutations = {
     state.list = payload;
   },
   info(state, payload) {
-    console.log("state", payload);
     if (payload.address) {
       payload.address = JSON.parse(payload.address);
     }
@@ -20,6 +21,8 @@ const mutations = {
       parseInt(payload.start_time * 1)
     ).toLocaleString();
     state.info = payload;
+    state.longitude = payload.longitude;
+    state.latitude = payload.latitude;
   },updata(state,payload){
     state.updata=payload;
   }

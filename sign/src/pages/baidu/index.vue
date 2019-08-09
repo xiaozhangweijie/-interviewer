@@ -79,7 +79,7 @@ export default {
       })
     },givecord(){
         wx.navigateTo({
-       url:"/pages/sign/main"
+       url:"/pages/sign/main?id="+this.id
      })
     }
   },

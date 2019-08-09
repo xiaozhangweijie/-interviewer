@@ -23,17 +23,29 @@ import {mapState, mapActions} from 'vuex'
 export default {
   data () {
     return {
+         markers:[]
     }
   },
   components: {
 
   },
   computed: {
-   
+    ...mapState({
+      longitude: state=>state.tab.longitude,
+      latitude: state=>state.tab.latitude
+    })
   },
 
   methods: {
-  
+     ...mapActions({
+      location: 'tab/getSigndetail'
+    }),
+    look(){
+        this.location(this.id);
+    }
+  },  onLoad(options) {
+    this.id = options.id;
+    this.look();
   }
 
 }
