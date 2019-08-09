@@ -1,9 +1,14 @@
 {
   "pages": [
+<<<<<<< HEAD
+=======
+    "pages/addInterviews/main",
+>>>>>>> sjxx
     "pages/index/main", 
     "pages/notBegun/main",
     "pages/baidu/main",
     "pages/my/main",
+<<<<<<< HEAD
 
     "pages/address/main",
 
@@ -11,6 +16,9 @@
 
 
 
+=======
+    "pages/address/main"
+>>>>>>> sjxx
 
   ],
   "window": {

@@ -7,14 +7,6 @@ const qqMapSdk = new QQMapWX({
 
 const state = {
   addList:[],
-  add:{
-    name:'',
-    phone:'',
-    textarea:'',
-    address:'',
-    item:[]
-},
-  
 }
 
 const actions = {
@@ -41,10 +33,11 @@ const mutations={
             state.dataList=res.data
         },
     })
-},
-getItem(state,payload){
+    },
+  getItem(state,payload){
+    console.log(payload)
     state.add.item=payload
-},
+    },
 }
 
 

@@ -1,94 +1,166 @@
 <template>
-  <div class="counter-warp">
-    <p class="title">面试信息</p>
-    <div class="install">
-      <div class="left">公司名称</div>
-      <div class="right">
-        <input type="text" placeholder="请输入公司名称" v-model="name">
-      </div>
-    </div>
-    <div class="install">
-      <div class="left">公司电话</div>
-      <div class="right">
-        <input type="text" placeholder="请输入面试联系人电话" v-model="phone">
-      </div>
-    </div>
-    <div class="install">
-      <div class="left">
-    <picker
-              mode="multiSelector"
-              :range="dateRange"
-              :value="info.date"
-              @change="dateChange"
-              @columnchange="columnChange"
-            ><view class="date">面试时间：{{dateShow}}</view>
-            </picker>
-           
-      </div>
-      <div class="right"> 
-                   <icon type="info" class="icon" @click="btnClick"/>
-                </div>
-    </div>
-    <div class="install">
-      <div class="left" @click="clickAddress">面试地址</div>
-      <div class="right">
-        <input type="text" placeholder="请输入公司地址"  v-model="address">
-      </div>
-    </div>
-    <div class="beizhu">
-      <p class="title">备注信息</p>
-      <textarea class="texts" name id cols="20" rows="30" v-model="textarea">备注信息(可选,100个字以内)</textarea>
-      <button class="btn" @click="submit" >确认</button>
-    </div>
+  <div class="wrap">
+    <form @submit="submit" report-submit="true">
+      <div class="top">面试信息</div>
+      <ul>
+        <li>
+          <span>公司名称</span>
+          <input name="company" v-model="company" placeholder="请输入公司名称" />
+        </li>
+        <li>
+          <span>公司电话</span>
+          <input name="phone" v-model="phone" placeholder="请输入公司电话" />
+        </li>
+        <li>
+          <span>面试时间</span>
+          <picker 
+                mode="multiSelector" 
+                :range="dateRange"
+                :value="info.date" 
+                @columnchange="columnChange"
+            >
+                {{dateShow}}
+          </picker>
+          <icon @click="showToast" class="tip" type="warn" color="#197DBF" size="20"></icon>
+        </li>
+        <li>
+          <span>面试地点</span>
+          <input @tap="serach()" name="address" v-model="address" placeholder="请输入面试地点" />
+        </li>
+      </ul>
+      <div class="top">备注信息</div>
+      <textarea  name="test" class="textarea" cols="30" v-model="description" rows="10" placeholder="备注信息(可选,100个字以内)"></textarea>
+      <button form-type="submit">确认</button>
+    </form>
   </div>
 </template>
-
 <script>
-const moment = require('moment');
+import moment from "moment";
+import { mapState, mapActions, mapMutations } from "vuex";
+
 const range = [
-  [0,1,2,3,4,5,6,7,8,9],
-  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-  ['00分','10分','20分','30分','40分','50分']
+    [0,1,2,3,4,5,6,7,8,9],
+    [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+    ['00分','10分','20分','30分','40分','50分']
 ];
 export default {
+  props: {},
+  components: {},
   data() {
-     return {
-        info: {
-        date: [0,0,0],
-      },           
-        }
-
+    return {
+      info: {
+        date: [0, 0, 0]
+      },
+      company:"",
+      phone: "",
+      address:"",
+      start_time: 1565236800000,
+      description: "",
+    };
+  },
+ 
+  created() {
+    // 如果当前时间是十一点之后，过滤掉今天
+    if (moment().hour() == 23) {
+      this.info.date = [1, 0, 0];
+    }
+  },
+  computed: {
+    ...mapState({
+      seccessList: state => state.add.seccessList,
+      longitude:state=>state.addInterview.longitude,
+      latitude:state=>state.addInterview.latitude
+      // company: state => state.add.company,
+      // phone: state => state.add.phone
+    }),
+    // 处理面试日期
+    dateRange() {
+      let dateRange = [...range];
+      // 如果时间是今天，过滤掉现在之前的小时
+      if (!this.info.date[0]) {
+        dateRange[1] = dateRange[1].filter(item => {
+          return item > moment().hour();
+        });
+      }
+      // 格式化小时
+      dateRange[1] = dateRange[1].map(item => {
+        return item + "点";
+      });
+      // 计算当前日期之后的十天
+      dateRange[0] = dateRange[0].map(item => {
+        return (
+          moment()
+            .add(item, "days")
+            .date() + "号"
+        );
+      });
+      return dateRange;
+    },
+    // 显示的日期
+    dateShow() {
+      return moment()
+        .add(
+          moment().hour() == 23 ? this.info.date[0] - 1 : this.info.date[0],"d" )
+        .add(this.info.date[0]
+            ? this.info.date[1] - moment().hour()
+            : this.info.date[1] + 1,"h"
+        )
+        .minute(this.info.date[2] * 10)
+        .format("YYYY-MM-DD HH:mm");
+    }
+  },
+  onLoad: function(options) {
+    console.log(options)
+    this.address = options.id;
   },
   methods: {
-    //点击确定验证
+    ...mapActions({
+      addData: "add/addData",
+      getLocation:'home/getLocation'
+    }),
+    ...mapMutations({
+      initAddInfo: "add/initAddInfo"
+    }),
+ // 监听多列选择器每列变化
+        columnChange(e){
+            let {column, value} = e.target;       
+            let date = [...this.info.date];
+            date[column] = value;
+            this.info.date = date;
+        },
+    //表单
     submit(e) {
+<<<<<<< HEAD
          const url = "../notBegun/main";
       mpvue.navigateTo({ url });
       if (!this.name) {
+=======
+      //判断公司名称是否为空
+      if (!this.company) {
+>>>>>>> sjxx
         wx.showToast({
-          title: "请输入公司名称", //提示的内容,
-          icon: "none", //图标,
-          duration: 2000
+          title: "请输入公司名称",
+          icon: "none"
         });
-        return false;
+        return;
       }
       // 判断手机号
       if (!/^1(3|4|5|7|8)\d{9}$/.test(this.phone)) {
         wx.showToast({
-          title: "请输入面试联系人的手机或座机",
-          icon: "none",
-          duration: 2000
+          title: "请输入正确的手机号或座机号",
+          icon: "none"
         });
-        return false;
+        return;
       }
+      // 判断面试地址
       if (!this.address) {
         wx.showToast({
           title: "请选择公司地址",
-          icon: "none",
-          duration: 2000
+          icon: "none"
         });
-        return false;
+        return;
       }
+<<<<<<< HEAD
         if (!this.textarea) {
         wx.showToast({
           title: "请填写备注",
@@ -104,98 +176,110 @@ export default {
             if (res.name) {
                 console.log('用户点击确定',this.name)
              
+=======
+       this.addData({
+        company:e.mp.detail.value.company,
+        phone:e.mp.detail.value.phone,
+        form_id:e.mp.detail.formId,
+        address:e.mp.detail.value.address,
+        latitude:this.latitude,
+        longitude:this.longitude,
+        start_time :moment(this.dateShow).unix() * 1000,
+        description:e.mp.detail.value.test
+      })
+      if (this.seccessList.code === 0) {
+        wx.showModal({
+          title: "温馨提示",
+          content: "添加面试成功",
+          success(res) {
+            console.log(res);
+            if (res.confirm) {
+              wx.navigateTo({
+                url: "/pages/notBegun/main"
+              });
+>>>>>>> sjxx
             } else if (res.cancel) {
-                console.log('用户点击取消')
             }
           }
-        })
-    },
- //icon提示
-      iconBtn() {
-          wx.showToast({
-            title: '成功',
-            icon: 'success',
-            duration: 2000
-        })
-      },
-    //跳转地址
-    clickAddress: () => {
-      const url = "../address/main";
-      mpvue.navigateTo({ url });
-    },
-  },
-   computed: {
-   dateRange(){
-      let dateRange = [...range];
-      // 如果时间是今天，过滤掉现在之前的小时
-      if (!this.info.date[0]){
-        dateRange[1] = dateRange[1].filter(item=>{
-          return item>moment().hour();
-        })
-      }else{
-        dateRange[1] = range[1]
+        });
       }
-      // 格式化小时
-      dateRange[1] = dateRange[1].map(item=>{
-        return item+'点'
-      })
-      // 计算当前日期之后的十天
-      dateRange[0] = dateRange[0].map(item=>{
-        return moment().add(item, 'days').date()+'号'
-      })
-      return dateRange;
     },
-    // 显示的日期
-    dateShow(){
-      return moment()
-      .add(moment().hour()==23?this.info.date[0]-1:this.info.date[0], 'd')
-       .add(this.info.date[1]+1, 'h')
-      .minute(this.info.date[2]*10)
-      .format('YYYY-MM-DD HH:mm');
+    serach() {
+      wx.navigateTo({
+        url: "/pages/address/main"
+      });
     },
-  },
+    showToast() {
+      wx.showToast({
+        title: "在面试前一个小时我们会通知你的",
+        icon: "none",
+        duraton: 2000
+      });
+    }
+  }
 };
 </script>
-
-<style scoped>
-.counter-warp {
+<style>
+.wrap {
   width: 100%;
   height: 100%;
 }
-.title {
-  padding: 0 15px;
+.top {
   width: 100%;
-  height: 30px;
-  background: #eee;
-  line-height: 30px;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: rgb(238, 234, 234);
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  font-size: 35rpx;
 }
-.install {
-  margin-top: 20px;
+form {
   width: 100%;
+}
+ul {
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+li {
+  color: rgb(160, 156, 156);
+  font-size: 30rpx;
+  width: 100%;
+  height: 100rpx;
   display: flex;
-  border-bottom: 1px solid #eee;
-  color: #666666;
-  padding: 5px 0;
+  align-items: center;
+  border-bottom: 1px solid rgb(231, 229, 229);
 }
-.left {
-  margin-left: 15px;
+li > input,
+li > picker {
+  padding-left: 60rpx;
 }
-.right {
-  margin-left: 20px;
+textarea {
+  font-size: 30rpx;
+  color: #333;
+  width: 690rpx;
+  height: 200rpx;
+  margin: 30rpx;
+  box-sizing: border-box;
+  padding: 10rpx;
+  border: 1rpx solid silver;
+  border-radius: 5rpx;
 }
-.beizhu {
-  margin-top: 15px;
-  padding: 10px 0;
+.tip {
+  margin-left: 180rpx;
 }
-.texts {
-  height: 100px;
-  margin-top: 15px;
-  margin-left: 35px;
-  border: 1px solid #ccc;
-}
-.btn {
-  background: #868686;
-  margin-top: 15px;
+button {
+  width: 100%;
+  height: 100rpx;
+  background: #999;
   color: #fff;
+  font-weight: 500;
+  font-size: 40rpx;
+  border-radius: 0;
+  margin-top: 50rpx;
+  background: #197dbf;
+}
+button.disable {
+  background: #999;
 }
 </style>
