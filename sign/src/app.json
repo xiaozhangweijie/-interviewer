@@ -1,9 +1,12 @@
 {
   "pages": [
     "pages/addInterviews/main",
-    "pages/address/main",
     "pages/index/main", 
-    "pages/counter/main"
+    "pages/notBegun/main",
+    "pages/baidu/main",
+    "pages/my/main",
+    "pages/address/main"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,6 +14,4 @@
     "navigationBarTitleText": "一面而就",
     "navigationBarTextStyle": "black"
   }
-  
- 
 }

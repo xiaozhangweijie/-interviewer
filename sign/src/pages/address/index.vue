@@ -3,7 +3,7 @@
     <div class="header">
       <p>北京</p>
       <div>
-        <input type="text" placeholder="面试地址" v-model="val">
+        <input type="text" placeholder="面试地址" v-model="text">
       </div>
     </div>
     <div :class="datalist.length<=0?'active':'center'">
@@ -28,20 +28,20 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      text:""
+    };
   },
   methods: {
     ...mapActions({
       getSuggestion: "address/getSuggestion",
-        getSearch:'address/getSearch',
             getListItem:'address/getItem'
     }),
-       changeAddress(val){
-            this.getSearch(val)
-        },
         clickItem(item){
-            this.getListItem(item)
-            wx.navigateBack();
+            this.text=item.address
+            wx.navigateTo({
+              url:"/pages/addInterviews/main?id="+this.text
+            });
         }
   },
   mounted() {
