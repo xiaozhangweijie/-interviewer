@@ -27,11 +27,11 @@
       </li>
       <li :class="info.status===1?'active':null">
           <span>取消提醒:</span>
-        <switch></switch>
+        <switch @change="mess" :checked="info.remind===1"></switch>
       </li>
     </ul>
     <div class="btn" :class="info.status===1?'active':null">
-      <button>去打卡</button>
+      <button @click="givecord">去打卡</button>
       <button @click="giveup">放弃面试</button>
     </div>
   </div>
@@ -48,30 +48,39 @@ export default {
   },
   computed: {
     ...mapState({
-      info: state => state.tab.info
+      info: state => state.tab.info,
+      updata:state=>state.tab.updata
     })
   },
   methods: {
     ...mapActions({
-      location: "tab/getSigndetail"
-    }),
-    onload(id) {
-      console.log("id", id);
-      this.location(1944);
-    },giveup(){
+      location: "tab/getSigndetail",
+      update:"tab/update",
+      getList: "tab/getLocation"
+    }),giveup(){
          wx.showModal({
         title: '温馨提示', //提示的标题,
         content: '确定要放弃本次面试吗?', //提示的内容,
         success: async res => {
           if (res.confirm) {
-              
-            // await this.updateDetail({
-            //   id: this.id,
-            //   params: {  status: 1}
-            // })
+            await this.update({
+              id: this.id,
+              params:{status:1}
+            })
           }
+           this.location(this.id);
+           this.getList({ status: -1});
         }
       });
+    },mess(e){
+      this.update({
+      id:this.id,
+      params:{remind:e.target.value?1:-1}
+      })
+    },givecord(){
+        wx.navigateTo({
+       url:"/pages/sign/main"
+     })
     }
   },
   onLoad(options) {

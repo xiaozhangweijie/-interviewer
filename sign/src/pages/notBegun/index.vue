@@ -17,7 +17,7 @@
         <div>{{item.address.address}}</div>
         <div>
           <span>面试时间{{item.start_time}}</span>
-          <span class="end">{{item.remind===-1?"未提醒":item.remind===0?"已提醒":null}}</span>
+          <span class="end">{{item.remind===-1?"未提醒":item.remind===0?"已提醒":item.remind===1?"取消提醒":null}}</span>
         </div>
       </div>
     </section>
@@ -63,6 +63,7 @@ export default {
   },
   created() {
     this.tab(0);
+    //this.location({status:1})
   }
 };
 </script>

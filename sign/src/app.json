@@ -3,7 +3,8 @@
     "pages/notBegun/main",
     "pages/index/main",
     "pages/my/main",
-    "pages/baidu/main"
+    "pages/baidu/main",
+    "pages/sign/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

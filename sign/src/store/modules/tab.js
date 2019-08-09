@@ -1,8 +1,9 @@
 // 模块所有的状态
-import { sign, signDetail } from "../../service/index";
+import { sign, signDetail,updateSignDetail } from "../../service/index";
 const state = {
   list: [],
-  info: {}
+  info: {},
+  updata:[]
 };
 
 // 模块内的同步改变
@@ -19,6 +20,8 @@ const mutations = {
       parseInt(payload.start_time * 1)
     ).toLocaleString();
     state.info = payload;
+  },updata(state,payload){
+    state.updata=payload;
   }
 };
 
@@ -38,6 +41,11 @@ const actions = {
   async getSigndetail({ commit }, payload) {
     const res = await signDetail(payload);
     commit("info", res.data);
+  },
+  async update({commit},payload){
+    console.log("updata",payload);
+    const res=await updateSignDetail(payload);
+    commit("updata",res.data);
   }
 };
 export default {
