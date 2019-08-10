@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/main", 
+    "pages/addInterviews/main",
     "pages/notBegun/main",
     "pages/baidu/main",
     "pages/my/main",
-    "pages/sign/main",
     "pages/address/main",
-    "pages/addInterviews/main",
+    "pages/sign/main",
     "pages/geography/main"
   ],
   "window": {
