@@ -16,7 +16,7 @@
             class="start"
           >{{item.status===-1?"未开始":item.status===0?"已打卡":item.status===1?"已放弃":null}}</span>
         </div>
-        <div>{{item.address.address}}</div>
+        <div>{{item.address}}</div>
         <div>
           <span>面试时间{{item.start_time}}</span>
           <span

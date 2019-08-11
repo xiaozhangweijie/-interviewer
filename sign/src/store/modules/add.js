@@ -1,38 +1,27 @@
-
-import { postAdd } from '../../service/index'
+import { postAdd } from "../../service/index";
 const state = {
-    seccessList:''
-}
-
+  seccessList: ""
+};
 
 const mutations = {
-    pushAdd(state, payload) { 
-        state.seccessList=payload 
-        console.log('pay',payload)
-    },
-    initAddInfo(state, payload){
-        state.address=payload.address
-        console.log('....',state.address)
-    }
-}
+  pushAdd(state, payload) {
+    state.seccessList = payload;
+  },
+  initAddInfo(state, payload) {
+    state.address = payload.address;
+  }
+};
 const actions = {
-   
-    //添加试题 
-    async addData({ commit }, payload) {
-        console.log('999999999999',payload)
-        let data = await postAdd(payload)
-        console.log('data....',data)
-        commit('pushAdd', data)
-       
-    },
-    
-  
-}
+  //添加试题
+  async addData({ commit }, payload) {
+    let data = await postAdd(payload);
+    commit("pushAdd", data);
+  }
+};
 
 export default {
-    namespaced: "add",
-    state,
-    mutations,
-    actions
-
-}
+  namespaced: "add",
+  state,
+  mutations,
+  actions
+};

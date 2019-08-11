@@ -110,7 +110,6 @@ export default {
     }
   },
   onLoad: function(options) {
-    console.log(options)
     this.address = options.id;
   },
   methods: {
@@ -159,29 +158,26 @@ export default {
         phone:e.mp.detail.value.phone,
         form_id:e.mp.detail.formId,
         address:e.mp.detail.value.address,
-        latitude:this.latitude,
-        longitude:this.longitude,
+        latitude:this.latitude*1,
+        longitude:this.longitude*1,
         start_time :moment(this.dateShow).unix() * 1000,
         description:e.mp.detail.value.test
       })
-        wx.navigateTo({
+        // wx.navigateTo({
+        //         url: "/pages/notBegun/main"
+        //       });
+        wx.showModal({
+          title: "温馨提示",
+          content: "添加面试成功",
+          success(res) {
+            if (res.confirm) {
+              wx.navigateTo({
                 url: "/pages/notBegun/main"
               });
-      // if (this.seccessList.code === 0) {
-      //   wx.showModal({
-      //     title: "温馨提示",
-      //     content: "添加面试成功",
-      //     success(res) {
-      //       console.log(res);
-      //       if (res.confirm) {
-      //         wx.navigateTo({
-      //           url: "/pages/notBegun/main"
-      //         });
-      //       } else if (res.cancel) {
-      //       }
-      //     }
-      //   });
-      // }
+            } else if (res.cancel) {
+            }
+          }
+        });
     },
     serach() {
       wx.navigateTo({

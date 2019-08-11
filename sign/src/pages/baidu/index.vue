@@ -3,11 +3,10 @@
     <ul class="list">
       <li>
         <span>面试地址:</span>
-        <span>{{info.address && info.address.address}}</span>
+        <span>{{info.address&&info.address.address}}</span>
       </li>
       <li>
         <span>面试时间:</span>
-
         <span>{{info.start_time}}</span>
       </li>
       <li>
@@ -88,6 +87,7 @@ export default {
   },
   onLoad(options) {
     this.id = options.id;
+    console.log(this.id);
     this.location(this.id);
   },
   created() {},

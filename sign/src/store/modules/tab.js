@@ -11,7 +11,16 @@ const state = {
 // 模块内的同步改变
 const mutations = {
   updateLocation(state, payload) {
+    console.log("payload",payload);
+    // payload.forEach(item => {
+    //   item.address = JSON.parse(item.address);
+    //   item.start_time = new Date(parseInt(item.start_time * 1))
+    //     .toLocaleString()
+    //     .replace(/年|月/g, "-")
+    //     .replace(/日/g, "");
+    // });
     state.list = payload;
+    console.log("list",state.list);
   },
   info(state, payload) {
     if (payload.address) {
@@ -21,6 +30,7 @@ const mutations = {
       parseInt(payload.start_time * 1)
     ).toLocaleString();
     state.info = payload;
+    console.log("state.info",state.info);
     state.longitude = payload.longitude;
     state.latitude = payload.latitude;
   },
@@ -33,17 +43,19 @@ const mutations = {
 const actions = {
   async getLocation({ commit }, payload) {
     const res = await sign(payload);
-    res.data.forEach(item => {
-      item.address = JSON.parse(item.address);
-      item.start_time = new Date(parseInt(item.start_time * 1))
-        .toLocaleString()
-        .replace(/年|月/g, "-")
-        .replace(/日/g, "");
+    console.log("res",res);
+    res.data.map(item => {
+      // console.log("item",item)
+      if(item.address[0]==="{"){
+        item.address = JSON.parse(item.address).address;
+      }
+      item.start_time = new Date(parseInt(item.start_time * 1)).toLocaleString();
     });
     commit("updateLocation", res.data);
   },
   async getSigndetail({ commit }, payload) {
     const res = await signDetail(payload);
+    console.log("info",res.data);
     commit("info", res.data);
   },
   async update({ commit }, payload) {
