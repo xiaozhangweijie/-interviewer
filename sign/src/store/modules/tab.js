@@ -11,14 +11,6 @@ const state = {
 // 模块内的同步改变
 const mutations = {
   updateLocation(state, payload) {
-    console.log("payload",payload);
-    // payload.forEach(item => {
-    //   item.address = JSON.parse(item.address);
-    //   item.start_time = new Date(parseInt(item.start_time * 1))
-    //     .toLocaleString()
-    //     .replace(/年|月/g, "-")
-    //     .replace(/日/g, "");
-    // });
     state.list = payload;
     console.log("list",state.list);
   },
