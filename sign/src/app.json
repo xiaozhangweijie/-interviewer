@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/notBegun/main",
     "pages/index/main", 
+    "pages/notBegun/main",
     "pages/addInterviews/main",
     "pages/baidu/main",
     "pages/my/main",
