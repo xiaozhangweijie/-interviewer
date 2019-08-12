@@ -12,16 +12,16 @@ const state = {
 const mutations = {
   updateLocation(state, payload) {
     state.list = payload;
-    console.log("list",state.list);
   },
   info(state, payload) {
-    if (payload.address) {
+    if (payload.address[0]==="{") {
       payload.address = JSON.parse(payload.address);
     }
     payload.start_time = new Date(
       parseInt(payload.start_time * 1)
     ).toLocaleString();
     state.info = payload;
+    console.log(payload,"---payload");
     console.log("state.info",state.info);
     state.longitude = payload.longitude;
     state.latitude = payload.latitude;
@@ -35,7 +35,6 @@ const mutations = {
 const actions = {
   async getLocation({ commit }, payload) {
     const res = await sign(payload);
-    console.log("res",res);
     res.data.map(item => {
       // console.log("item",item)
       if(item.address[0]==="{"){
@@ -47,11 +46,9 @@ const actions = {
   },
   async getSigndetail({ commit }, payload) {
     const res = await signDetail(payload);
-    console.log("info",res.data);
     commit("info", res.data);
   },
   async update({ commit }, payload) {
-    console.log("updata", payload);
     const res = await updateSignDetail(payload);
     commit("updata", res.data);
   }
