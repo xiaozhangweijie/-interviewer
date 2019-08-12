@@ -24,6 +24,7 @@
           >{{item.remind===-1?"未提醒":item.remind===0?"已提醒":item.remind===1?"取消提醒":null}}</span>
         </div>
       </div>
+      <div class="bottom">{{listt.length>=10?"上拉加载":"我是有底线的"}}</div>
     </section>
     <div v-else class="none">当前分类还没有面试！</div>
   </div>
@@ -68,7 +69,13 @@ export default {
   },
   created() {
     this.tab(0);
-    //this.location({status:1})
+    //this.location({status:-1})
+  },
+  onLoad(){
+    this.location({status:-1})
+  },
+  onReachBottom(){
+    console.log(33);
   }
 };
 </script>
@@ -147,4 +154,14 @@ section {
   width: 100%;
   height: 100%;
 }
+.top{
+  position:absolute;
+  top:-44px;
+  width:100%;
+}
+// .bottom{
+//   width:100%;
+//   position:absolute;
+//   bottom:-44px;
+// }
 </style>

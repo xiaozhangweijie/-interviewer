@@ -3,10 +3,8 @@
 <section class="section">
     <map
       id="map"
-      show-location
       :markers="markers"
-      :longitude="longitude"
-      :latitude="latitude"
+      :updateDistance="updateDistance"
     ></map>
       <div class="location">
        <image src="../../static/images/location.png"></image>
@@ -23,7 +21,8 @@ import {mapState, mapActions} from 'vuex'
 export default {
   data () {
     return {
-         markers:[]
+         markers:[],
+         distance:0
     }
   },
   components: {
@@ -33,7 +32,10 @@ export default {
     ...mapState({
       longitude: state=>state.tab.longitude,
       latitude: state=>state.tab.latitude
-    })
+    }),
+    distance(){
+      return getDistance(longitude,latitude)
+    }
   },
 
   methods: {
@@ -42,6 +44,9 @@ export default {
     }),
     look(){
         this.location(this.id);
+    },updateDistance(distance){
+      this.distance=distance;
+console.log("distance",this.distance);
     }
   },  onLoad(options) {
     this.id = options.id;
